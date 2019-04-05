@@ -1,18 +1,65 @@
-<h2>Lista veiculos</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<ul>
-{% for veiculo in veiculos %}
-    <li>
-        <a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.placa }}</a>
+{% block menu %}
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
     </li>
-{% endfor %}
-</ul>
+    <li class="nav-item dropdown">
+        <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+        <a class="dropdown-item active" href="{% url 'core_lista_veiculos' %}">Veículos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movrotativos' %}">Rotativos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movrotativos' %}">Movimentos Rotativos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movmensalistas' %}">Movimento Mensalistas</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">Logout</a>
+    </li>
+    </ul>
+{% endblock %}
 
+{% block  main %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Lista veiculos</h2>
+            <form action="{% url 'core_veiculo_novo' %}" method="POST">
+                {% csrf_token %}
 
-<form action="{% url 'core_veiculo_novo' %}" method="POST">
-    {% csrf_token %}
+                {{ form|bootstrap  }}
 
-    {{ form.as_p  }}
-
-    <button type="submit">Cadastrar</button>
-</form>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Proprietario</th>
+                    <th scope="col">Cor</th>
+                    <th scope="col">Observacoes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for veiculo in veiculos %}
+                        <tr>
+                        <th scope="row"><a href="{% url 'core_veiculo_update' veiculo.id%}">{{ veiculo.id }}</a></th>
+                        <td><a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.marca }}</a></td>
+                        <td><a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.placa }}</a></td>
+                        <td><a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.proprietario }}</a></td>
+                        <td><a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.cor }}</a></td>
+                        <td><a href="{% url 'core_veiculo_update' veiculo.id %}">{{ veiculo.observacoes }}</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

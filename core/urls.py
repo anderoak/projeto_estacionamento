@@ -24,30 +24,30 @@ from .views import (
 )
 
 urlpatterns = [
-    path('', home, name='core.urls'),
+    path('', home, name='home'),
     
     path('pessoas', lista_pessoas, name='core_lista_pessoas'),
     path('pessoa_novo', pessoa_novo, name='core_pessoa_novo'),
-    re_path(r'^pessoa_update/(?P<id>\d+)/$', pessoa_update, name='core_pessoa_update'),
-    re_path(r'^pessoa_delete/(?P<id>\d+)/$', pessoa_delete, name='core_pessoa_delete'),
+    path('pessoa_update/<int:id>/', pessoa_update, name='core_pessoa_update'),
+    path('pessoa_delete/<int:id>/', pessoa_delete, name='core_pessoa_delete'),
 
     path('veiculos', lista_veiculos, name='core_lista_veiculos'),
     path('veiculo_novo', veiculo_novo, name='core_veiculo_novo'),
-    re_path(r'^veiculo_update/(?P<id>\d+)/$', veiculo_update, name='core_veiculo_update'),
-    re_path(r'^veiculo_delete/(?P<id>\d+)/$', veiculo_delete, name='core_veiculo_delete'),
+    path('veiculo_update/<int:id>/', veiculo_update, name='core_veiculo_update'),
+    path('veiculo_delete/<int:id>/', veiculo_delete, name='core_veiculo_delete'),
     
-    path('movrotativos', lista_movrotativos, name='core_lista_movrotativos'),
-    path('movrotativos_novo', movrotativos_novo, name='core_movrotativos_novo'),
-    re_path(r'^movrotativos_update/(?P<id>\d+)/$', movrotativos_update, name='core_movrotativos_update'),
-    re_path(r'^movrotativos_delete/(?P<id>\d+)/$', movrotativos_delete, name='core_movrotativos_delete'),
-
     path('mensalistas', lista_mensalistas, name='core_lista_mensalistas'),
     path('mensalista_novo', mensalista_novo, name='core_mensalista_novo'),
-    re_path(r'^mensalista_update/(?P<id>\d+)/$', mensalista_update, name='core_mensalista_update'),
-    re_path(r'^mensalista_delete/(?P<id>\d+)/$', mensalista_delete, name='core_mensalista_delete'),
+    path('mensalista_update/<int:id>/', mensalista_update, name='core_mensalista_update'),
+    path('mensalista_delete/<int:id>/', mensalista_delete, name='core_mensalista_delete'),
+
+    path('movrotativos', lista_movrotativos, name='core_lista_movrotativos'),
+    path('movrotativos_novo', movrotativos_novo, name='core_movrotativos_novo'),
+    path('movrotativos_update/<int:id>/', movrotativos_update, name='core_movrotativos_update'),
+    path('movrotativos_delete/<int:id>/', movrotativos_delete, name='core_movrotativos_delete'),
 
     path('movmensalistas', lista_movmensalistas, name='core_lista_movmensalistas'),
     path('movmensalistas_novo', movmensalistas_novo, name='core_movmensalistas_novo'),
-    re_path(r'^movmensalistas_update/(?P<id>\d+)/$', movmensalistas_update, name='core_movmensalistas_update'),
-    re_path(r'^movmensalistas_delete/(?P<id>\d+)/$', movmensalistas_delete, name='core_movmensalistas_delete'),
+    path('movmensalistas_update/<int:id>/', movmensalistas_update, name='core_movmensalistas_update'),
+    path('movmensalistas_delete/<int:id>/', movmensalistas_delete, name='core_movmensalistas_delete'),
 ]

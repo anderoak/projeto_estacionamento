@@ -1,17 +1,66 @@
-<h2>Lista Movimentos Mensalistas</h2>
+{% extends 'base.html' %}
+{% load bootstrap %}
 
-<ul>
-{% for mov in movmensalistas %}
-    <li>
-        <a href="{% url 'core_movmensalistas_update' mov.id %}">{{ mov.mensalista }} - {{ mov.dt_pgto }}</a>
+{% block menu %}
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
     </li>
-{% endfor %}
-</ul>
+    <li class="nav-item dropdown">
+        <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Serviços</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+        <a class="dropdown-item" href="{% url 'core_lista_veiculos' %}">Veículos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movrotativos' %}">Rotativos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movrotativos' %}">Movimentos Rotativos</a>
+        <a class="dropdown-item" href="{% url 'core_lista_movmensalistas' %}">Movimento Mensalistas</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">Logout</a>
+    </li>
+    </ul>
+{% endblock %}
 
-<form action="{% url 'core_movmensalistas_novo' %}" method="POST">
-    {% csrf_token %}
+{% block  main %}
 
-    {{ form.as_p  }}
+<div class="row">
+        <div class="col-12">
+            <h2>Lista Movimentos Mensalistas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="{% url 'core_movmensalistas_novo' %}" method="POST">
+                {% csrf_token %}
 
-    <button type="submit">Cadastrar</button>
-</form>
+                {{ form|bootstrap }}
+
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Veículo</th>
+                    <th scope="col">Início</th>
+                    <th scope="col">Valor Mensal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movmensalista in movmensalistas %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'core_movmensalistas_update' movmensalista.id%}">{{ movmensalista.id }}</a></th>
+                        <td><a href="{% url 'core_movmensalistas_update' movmensalista.id%}">{{ movmensalista.mensalista }}</a></td>
+                        <td><a href="{% url 'core_movmensalistas_update' movmensalista.id%}">{{ movmensalista.dt_pgto }}</a></td>
+                        <td><a href="{% url 'core_movmensalistas_update' movmensalista.id%}">{{ movmensalista.total }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}
