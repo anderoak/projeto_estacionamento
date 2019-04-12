@@ -2,58 +2,31 @@
 {% load static %}
 
 {% block main %}
-    <div class="row row-space ">
-        <div class="col-3">
-            <img src="{% static 'img/logo_park_medium.png' %}" class="img-fluid" alt="Estacionamento 24 horas">
-        </div>
-        <div class="col-9">
-            <h1>Estacionamento 24 horas</h1>
-            <span>Slogan da sua empresa aqui</span>
-        </div>
-    </div>
-
-    {% include 'website/menu.html' %}
-
     <div class="row row-space">
         <div class="col-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aenean at nulla at purus bibendum laoreet. Proin ornare bibendum purus.
-            Nunc vel nisi at odio posuere molestie non at purus. Fusce ultrices ligula at urna egestas cursus.
+            <p>{{ linha1coluna1 }}</p>
         </div>
         <div class="col-6">
-            Morbi massa nisi, semper eu elit in, rutrum scelerisque risus.
-            Vestibulum pellentesque lectus vel nibh pharetra feugiat. Fusce nec magna enim.
-            Cras rhoncus suscipit diam sed ullamcorper.
+            <p>{{ linha1coluna2 }}</p>
         </div>
     </div>
     <div class="row row-space">
         <div class="col-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aenean at nulla at purus bibendum laoreet. Proin ornare bibendum purus.
-            Nunc vel nisi at odio posuere molestie non at purus. Fusce ultrices ligula at urna egestas cursus.
+            <p>{{ linha2coluna1 }}</p>
         </div>
         <div class="col-4">
             <img src="{% static 'img/parking_pic.jpg' %}" class="img-fluid" alt="Estacionamento 24 horas">
         </div>
         <div class="col-4">
-            Morbi massa nisi, semper eu elit in, rutrum scelerisque risus.
-            Vestibulum pellentesque lectus vel nibh pharetra feugiat. Fusce nec magna enim.
-            Cras rhoncus suscipit diam sed ullamcorper.
+            <p>{{ linha2coluna2}}</p>
         </div>
     </div>
     <div class="row row-space">
         <div class="col-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Aenean at nulla at purus bibendum laoreet. Proin ornare bibendum purus.
-            Nunc vel nisi at odio posuere molestie non at purus. Fusce ultrices ligula at urna egestas cursus.
+            <p>{{ linha3coluna1 }}</p>
         </div>
         <div class="col-6">
-            Morbi massa nisi, semper eu elit in, rutrum scelerisque risus.
-            Vestibulum pellentesque lectus vel nibh pharetra feugiat. Fusce nec magna enim.
-            Cras rhoncus suscipit diam sed ullamcorper.
+            <p>{{ linha3coluna2}}</p>
         </div>
     </div>
-
-    {% include 'website/footer.html' %}
-    
 {% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block menu %}
+    <div class="row row-space">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_servicos' %}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_sobre' %}">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_planos' %}">Planos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'website_contato' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Sistema</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row row-space">
+        <div class="col-12">
+            <p>{{ mensagem }}</p>
+        </div>
+    </div>
+    <div class="row row-space">
+        <div class="col-6">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputNome">Nome</label>
+                        <input type="text" class="form-control" id="inputNome" placeholder="Seu nome aqui" name="nome">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail">E-mail</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Seu endereço de e-mail aqui" name="email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputTelefone">Telefone</label>
+                        <input type="text" class="form-control" id="inputTelefone" placeholder="Seu telefone aqui" name="telefone">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputMensagem">Mensagem</label>
+                    <textarea type="text" class="form-control" id="inputMensagem" rows="6" placeholder="Sua mensagem aqui" name="mensagem"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Aenean at nulla at purus bibendum laoreet. Proin ornare bibendum purus.
+                Nunc vel nisi at odio posuere molestie non at purus. Fusce ultrices ligula at urna egestas cursus.
+                
+                Morbi massa nisi, semper eu elit in, rutrum scelerisque risus.
+                Vestibulum pellentesque lectus vel nibh pharetra feugiat. Fusce nec magna enim.
+                Cras rhoncus suscipit diam sed ullamcorper.
+            </p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.319001246671!2d-43.181609984557475!3d-22.901601843444713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997f5ea64c95e9%3A0x4365b0b75542bd64!2sAv.+Pres.+Vargas%2C+3515-3595+-+Centro%2C+Rio+de+Janeiro+-+RJ%2C+20091-000!5e0!3m2!1sen!2sbr!4v1554745931527!5m2!1sen!2sbr"
+                width="550" height="260" frameborder="0" style="border:0" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+{% endblock %}
+
+

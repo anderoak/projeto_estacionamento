@@ -19,8 +19,7 @@ from .forms import (
 
 
 def home(request):
-    context = {'mensagem': 'Olá mundo!'}
-    return render(request, 'core/index.html', context)
+    return render(request, 'core/index.html')
 
 
 @login_required(login_url="home")

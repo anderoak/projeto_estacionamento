@@ -21,10 +21,16 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <li class="nav-item">
+                <a class="nav-link" href="..">Website</a>
+            </li>
             </li>
         {% else %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="..">Website</a>
             </li>
         {% endif %}
     </ul>

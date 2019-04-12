@@ -1,0 +1,47 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block menu %}
+    <div class="row row-space">
+        <div class="col-12">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_servicos' %}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'website_sobre' %}">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_planos' %}">Planos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'website_contato' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Sistema</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="row row-space">
+        <div class="col-12">
+            <p>{{ linha1 }}</p>
+        </div>
+    </div>
+    <div class="row row-space">
+        <div class="col-8">
+            <p>{{ linha2 }}</p>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'img/parking_pic.jpg' %}" class="img-fluid" alt="Estacionamento 24 horas">
+        </div>
+    </div>
+{% endblock %}
+
+
