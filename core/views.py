@@ -1,3 +1,4 @@
+import csv
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -237,3 +238,171 @@ def movmensalistas_delete(request, id):
         return redirect('core_lista_movmensalistas')
     else:
         return render(request, 'core/delete_movmensalistas_confirm.html', {'movmensalistas': movmensalistas})
+
+from django.http import HttpResponse
+from django.template.loader import get_template
+import xhtml2pdf.pisa as pisa
+import io
+from django.views.generic.base import View
+
+
+class Render:
+    @staticmethod
+    def render(path: str, params: dict, filename: str):
+        template = get_template(path)
+        html = template.render(params)
+        response = io.BytesIO()
+        pdf = pisa.pisaDocument(
+            io.BytesIO(html.encode("UTF-8")), response)
+        if not pdf.err:
+            response = HttpResponse(
+                response.getvalue(), content_type='application/pdf')
+            #response['Content-Disposition'] = 'attachment;filename=%s.pdf' % filename
+            return response
+        else:
+            return HttpResponse("Error Rendering PDF", status=400)
+
+
+class pessoa_exporta_pdf(View):
+
+        def get(self, request):
+                pessoas = Pessoa.objects.all()
+                params = {
+                        'pessoas': pessoas,
+                        'request': request,
+                }
+                return Render.render('core/relatorio_pessoa.html', params, 'relatorio_pessoas')
+
+
+class pessoa_exporta_csv(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_pessoas.csv"'
+
+        pessoas = Pessoa.objects.all()
+
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Nome', 'endereco', 'telefone'])
+
+        for pessoa in pessoas:
+            writer.writerow(
+                [pessoa.id, pessoa.nome, pessoa.endereco, pessoa.telefone])
+
+        return response
+
+
+class veiculo_exporta_pdf(View):
+
+        def get(self, request):
+                veiculos = Veiculo.objects.all()
+                params = {
+                        'veiculos': veiculos,
+                        'request': request,
+                }
+                return Render.render('core/relatorio_veiculo.html', params, 'relatorio_veiculos')
+
+
+class veiculo_exporta_csv(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_veiculo.csv"'
+
+        veiculos = Veiculo.objects.all()
+
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Marca', 'placa', 'Proprietario', 'Cor'])
+
+        for veiculo in veiculos:
+            writer.writerow(
+                [veiculo.id, veiculo.marca, veiculo.placa, veiculo.proprietario,
+                 veiculo.cor
+                 ])
+
+        return response
+
+
+class mensalista_exporta_pdf(View):
+
+        def get(self, request):
+                mensalistas = Mensalista.objects.all()
+                params = {
+                        'mensalistas': mensalistas,
+                        'request': request,
+                }
+                return Render.render('core/relatorio_mensalista.html', params, 'relatorio_mensalista')
+
+
+class mensalista_exporta_csv(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_mensalista.csv"'
+
+        mensalistas = Mensalista.objects.all()
+
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Veiculo', 'Início', 'Valor Mes'])
+
+        for mensalista in mensalistas:
+            writer.writerow(
+                [mensalista.id, mensalista.veiculo, mensalista.inicio, mensalista.valor_mes])
+
+        return response
+
+
+class movmensalista_exporta_pdf(View):
+
+        def get(self, request):
+                movmensalistas = MovMensalista.objects.all()
+                params = {
+                        'movmensalistas': movmensalistas,
+                        'request': request,
+                }
+                return Render.render('core/relatorio_movmensalista.html', params, 'relatorio_movmensalista')
+
+
+class movmensalista_exporta_csv(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_movmensalista.csv"'
+
+        movmensalistas = MovMensalista.objects.all()
+
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Mensalista', 'Data Pagto.', 'Total'])
+
+        for movmensalista in movmensalistas:
+            writer.writerow(
+                [movmensalista.id, movmensalista.mensalista, movmensalista.dt_pago,
+                movmensalista.total])
+
+        return response
+
+
+class movrotativo_exporta_pdf(View):
+
+        def get(self, request):
+                movrotativos = MovRotativo.objects.all()
+                params = {
+                        'movrotativos': movrotativos,
+                        'request': request,
+                }
+                return Render.render('core/relatorio_movrotativo.html', params, 'relatorio_movrotativo')
+
+
+class movrotativo_exporta_csv(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_movrotativo.csv"'
+
+        movrotativos = MovRotativo.objects.all()
+
+        writer = csv.writer(response)
+        writer.writerow(['Id', 'Check-In', 'Check-Out', 'Valor/hora', 'Veiculo', 'Pago'])
+
+        for movrotativo in movrotativos:
+            writer.writerow(
+                [movrotativo.id, movrotativo.checkin, movrotativo.checkout, movrotativo.valor_hora,
+                 movrotativo.veiculo, movrotativo.pago
+                 ])
+
+        return response

@@ -1,0 +1,24 @@
+<style>
+    .test {
+        color: red;
+    }
+</style>
+
+<h1 class="test">Relatorio de Mensalistas</h1>
+<table>
+  <tr>
+    <td>Id</td>
+    <td>Veículo</td>
+    <td>Inicio</td>
+    <td>Valor Mes</td>
+  </tr>
+
+  {% for mensalista in mensalistas %}
+      <tr>
+        <td>{{ mensalista.id }}</td>
+        <td>{{ mensalista.veiculo }}</td>
+        <td>{{ mensalista.inicio }}</td>
+        <td>{{ mensalista.valor_mes }}</td>
+      </tr>
+  {% endfor %}
+</table> 

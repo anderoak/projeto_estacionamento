@@ -1,0 +1,24 @@
+<style>
+    .test {
+        color: red;
+    }
+</style>
+
+<h1 class="test">Relatorio de Pessoas</h1>
+<table>
+  <tr>
+    <td>Id</td>
+    <td>Nome</td>
+    <td>Endereco</td>
+    <td>Telefone</td>
+  </tr>
+
+  {% for pessoa in pessoas %}
+      <tr>
+        <td>{{ pessoa.id }}</td>
+        <td>{{ pessoa.nome }}</td>
+        <td>{{ pessoa.endereco }}</td>
+        <td>{{ pessoa.telefone }}</td>
+      </tr>
+  {% endfor %}
+</table> 

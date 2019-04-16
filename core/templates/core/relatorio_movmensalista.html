@@ -1,0 +1,24 @@
+<style>
+    .test {
+        color: red;
+    }
+</style>
+
+<h1 class="test">Relatorio de Movimento Mensalista</h1>
+<table>
+  <tr>
+    <td>Id</td>
+    <td>Mensalista</td>
+    <td>Data Pgto.</td>
+    <td>Total</td>
+  </tr>
+
+  {% for movmensalista in movmensalistas %}
+      <tr>
+        <td>{{ movmensalista.id }}</td>
+        <td>{{ movmensalista.mensalista }}</td>
+        <td>{{ movmensalista.dt_pgto }}</td>
+        <td>{{ movmensalista.total }}</td>
+      </tr>
+  {% endfor %}
+</table> 

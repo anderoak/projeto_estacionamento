@@ -61,6 +61,10 @@
                 {% endfor %}
             </tbody>
         </table>
+
+                <a class="btn btn-info" href="{% url 'movmensalista_relatorio_pdf' %}">Relatório PDF</a>
+                <a class="btn btn-info" href="{% url 'movmensalista_relatorio_csv' %}">Relatório CSV</a>
+
         </div>
     </div>
 {% endblock %}
